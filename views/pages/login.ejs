@@ -1,0 +1,17 @@
+<%- include ('../partials/header') %> <%- include ('../partials/menu') %>
+
+<main>
+  <div class="container">
+    <form action="/login" method="POST">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" />
+
+        <label for="username">Username:</label>
+        <input type="text" id="name" name="username" />
+      
+        <input type="submit" value="Submit" />
+      </form>
+  </div>
+</main>
+
+<%- include ('../partials/footer') %>

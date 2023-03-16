@@ -1,0 +1,48 @@
+<%- include ('../partials/header') %> <%- include ('../partials/menu') %>
+
+<main>
+  <div class="container">
+    <!-- THE REST OF YOUR HTML CODE GOES HERE -->
+    <% if (locals.message) { %>
+        <div
+          class="alert alert-<%- locals.error ? 'danger' : 'success' %>"
+          role="alert"
+        >
+          <%= message %>
+        </div>
+    <% } %>
+    <table class="container-fluid">
+        <thead>
+            <tr>
+                <th> Course Name </th>
+                <th> Course ID </th>
+                <th> Course Credit Hours </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% courses.forEach(function(course) { %>
+                <tr>
+                    <td><%= course.course_name %></td>
+                    <td><%= course.course_id %></td>
+                    <td><%= course.credit_hours %></td>
+                    <td>
+                        <% if(locals.action == 'add' & !course.taken) { %>
+                            <form action="/courses/add" method="POST">
+                                <input type="hidden" name="course_id" value="<%- course.course_id %>">
+                                <button type="submit">ADD</button>
+                            </form>
+                        <% } else if(locals.action == 'delete') { %>
+                            <form action="/courses/delete" method="POST">
+                                <input type="hidden" name="course_id" value="<%- course.course_id %>">
+                                <button type="submit">DELETE</button>
+                            </form>
+                        <% } %>
+                    </td>
+                </tr>
+           <% }); %> 
+        </tbody>
+    </table>
+  </div>
+</main>
+
+<%- include ('../partials/footer') %>
