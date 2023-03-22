@@ -26,7 +26,12 @@
                     <td><%= course.course_id %></td>
                     <td><%= course.credit_hours %></td>
                     <td>
-                        <% if(locals.action === 'add') { %>
+                        <% if(locals.action === 'delete') { %>
+                            <form action="/courses/delete" method="POST">
+                                <input type="hidden" name="course_id" value="<%- course.course_id %>">
+                                <button type="submit">DELETE</button>
+                            </form>
+                        <% } else { %>
                             <% if (!course.taken) { %>
                                 <form action="/courses/add" method="POST">
                                     <input type="hidden" name="course_id" value="<%- course.course_id %>">
@@ -38,11 +43,6 @@
                                     <button type="button" disabled>ADD</button>
                                 </form>
                             <% } %>
-                        <% } else if(locals.action === 'delete') { %>
-                            <form action="/courses/delete" method="POST">
-                                <input type="hidden" name="course_id" value="<%- course.course_id %>">
-                                <button type="submit">DELETE</button>
-                            </form>
                         <% } %>
                     </td>
                 </tr>
